@@ -34,54 +34,38 @@ namespace Models
 
     public class Client : Person
     {
-        public string AccountNumber { get; private set; }
-        public decimal Balance { get; private set; }
-
-        public Client(string firstName, string lastName, DateTime birthDate, string accountNumber)
+        public Client(string firstName, string lastName, DateTime birthDate)
             : base(firstName, lastName, birthDate)
         {
-            AccountNumber = accountNumber;
-            Balance = 0.0m; // Initial balance is always 0
-        }       
+        }
     }
 
     public class Banque
     {
         public string Name { get; set; }
-        public List<Client> Clients { get; private set; }
+        public List<Account> Accounts { get; private set; }
 
         public Banque(string name)
         {
             Name = name;
-            Clients = new List<Client>();
+            Accounts = new List<Account>();
         }
 
-        public void AddClient(Client newClient)
+        public void AddAccount(Account newAccount)
         {
-            if (newClient != null)
+            if (newAccount != null)
             {
-                Clients.Add(newClient);
-                Console.WriteLine($" {newClient.FirstName} {newClient.LastName} nouveau client.");
+                Accounts.Add(newAccount);
+                Console.WriteLine($"Account {newAccount.Number} for {newAccount.Owner.FirstName} {newAccount.Owner.LastName} has been added.");
             }
         }
 
-        public void DisplayClientList()
+        public void DisplayAccountsList()
         {
-            Console.WriteLine($"\n--- Clients  {Name} ---");
-            foreach (var client in Clients)
+            Console.WriteLine($"\n--- compte de  {Name} ---");
+            foreach (var account in Accounts)
             {
-                Console.WriteLine($"Client: {client.FirstName} {client.LastName}, Account Number: {client.AccountNumber}, Balance: ${client.Balance}");
-            }
-        }
-
-        public void DisplayClient(string accountNumber)
-        {
-            foreach (var client in Clients)
-            {
-                if (client.AccountNumber == accountNumber)
-                {
-                    Console.WriteLine($"Client {client.FirstName} {client.LastName} account number {client.AccountNumber} is a client of bank {Name}.");
-                }
+                Console.WriteLine($"Account: {account.Number}, Propietaire: {account.Owner.FirstName} {account.Owner.LastName}, Balance: ${account.Balance}");
             }
         }
     }

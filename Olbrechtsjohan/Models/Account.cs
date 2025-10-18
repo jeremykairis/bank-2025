@@ -2,13 +2,13 @@ using System;
 
 namespace Models
 {
-    public class Account
+    abstract class Account
     {
         public string Number { get; }
         public decimal Balance { get; protected set; }
         public Person Owner { get; }
 
-        public Account(string number, Person owner, decimal initialBalance = 0)
+        abstract public Account(string number, Person owner, decimal initialBalance = 0)
         {
             if (string.IsNullOrWhiteSpace(number))
             {
