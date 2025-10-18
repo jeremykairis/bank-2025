@@ -9,13 +9,6 @@ class Account(string number, double balance, Person owner)
     }
     public virtual void Withdraw(double amount)
     {
-        if (amount > Balance)
-        {
-            Console.WriteLine("Solde insufisant");
-        }
-        else
-        {
-            Balance -= amount;
-        }
+        Balance -= amount;
     }
 }
