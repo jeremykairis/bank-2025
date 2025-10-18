@@ -14,4 +14,8 @@ class SavingsAccount : Account
             SetBalance(GetBalance() - amount);
         }
     }
+    protected override double CalculInterest()
+    {
+        return GetBalance() * 1.045;
+    }
 }

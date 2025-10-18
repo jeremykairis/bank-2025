@@ -37,4 +37,11 @@ abstract class Account
     {
         Balance = newBalance;
     }
+    protected abstract double CalculInterest();
+
+    public void ApplyInterest()
+    {
+        double interests = CalculInterest();
+        SetBalance(GetBalance()+interests);
+    }
 }

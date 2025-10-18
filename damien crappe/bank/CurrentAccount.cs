@@ -1,3 +1,5 @@
+using System.Reflection.Metadata.Ecma335;
+
 class CurrentAccount : Account
 {
     public double CreditLine { get; set; }
@@ -14,6 +16,17 @@ class CurrentAccount : Account
         else
         {
             SetBalance(GetBalance() - amount);
+        }
+    }
+    protected override double CalculInterest()
+    {
+        if (GetBalance() < 0)
+        {
+            return GetBalance() * 0.03;
+        }
+        else
+        {
+            return GetBalance() * 0.0975;
         }
     }
 }

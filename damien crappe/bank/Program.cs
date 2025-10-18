@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic; 
 using System.Globalization;
+
 class Program
 {
     static void Main(string[] args)
     {
-        List<Person> people = new List<Person>
-        {
-            new Person("John", "Doe", new DateTime(1990, 5, 24)),
-            new Person("Jane", "Smith", new DateTime(1985, 10, 12)),
-            new Person("Alice", "Johnson", new DateTime(2000, 3, 8))
-        };
+        Person owner1 = new Person("Aaron", "Crappe", new DateTime(2020, 1, 7));
+        Person owner2 = new Person("Taylor", "Swifer", new DateTime(2001, 2, 26));
 
-        foreach (var person in people)
-        {
-            Console.WriteLine($"{person.FirstName} {person.LastName}, Born on: {person.BirthDate.ToString("d", CultureInfo.InvariantCulture)}");
-        }
+        CurrentAccount currentAccount = new CurrentAccount("123445", 1500.0, 100.0, owner1);
+        CurrentAccount currentAccount2 = new CurrentAccount("987654", 2000.0, 500.0, owner2);
+        SavingsAccount savingsAccount = new SavingsAccount("968365", 10000.0, owner1);
+        SavingsAccount savingsAccount2 = new SavingsAccount("563248", 5000.0, owner2);
+
+        Console.WriteLine($"Le solde du compte d' {currentAccount.Owner.FirstName} est de {currentAccount.GetBalance()} EUR.");
+
+        currentAccount.ApplyInterest();
+        Console.WriteLine($"Après application des intérêts, le solde du compte d' {currentAccount.Owner.FirstName} est de {currentAccount.GetBalance()} EUR.");
+
+
     }
 }
