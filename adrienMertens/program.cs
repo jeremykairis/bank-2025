@@ -14,10 +14,18 @@
 
 class CurrentAccount
 {
-    private string number;
-    private double readonly balance;
-    private double creditLine;
-    private Person owner;
+    private string Number { get; set };
+    private double Balance { get; private set };
+    private double CreditLine { get; set };
+    private Person Owner { get; set };
+
+    public CurrentAccount(string number,Person owner, double creditLine = 0 )
+    {
+        Number = number;
+        Owner = owner;
+        CreditLine = creditLine;
+        Balance = 0;
+    }
 
     public void WithDraw(double amount)
     {
@@ -31,8 +39,13 @@ class CurrentAccount
 
 class Bank
 {
-    private readonly Dictionary<string, CurrentAccount> _accounts
-    private string name;
+    private Dictionary<string, CurrentAccount> _accounts = new Dictionary<string, CurrentAccount>();
+    private string name { get; set };
+
+    public Bank(string name)
+    {
+        Name = name;
+    }
     
     public void AddAccount(CurrentAccount account)
     {
@@ -56,8 +69,12 @@ class Bank
 
 class Program
 {
-    // Exemple d'utilisation
-    var bank = new Bank("Ma Banque");
-    var person = new Person("Adrien", "Mertens", new DateTime(1990, 1, 1));
-    var account = new CurrentAccount("BE123456789", person, 1000);
+    static void Main()
+    {
+        // Exemple d'utilisation
+        var bank = new Bank("Ma Banque");
+        var person = new Person("Adrien", "Mertens", new DateTime(1990, 1, 1));
+        var account = new CurrentAccount("BE123456789", person, 1000);
+    }
+    
 }
