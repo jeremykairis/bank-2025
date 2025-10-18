@@ -7,3 +7,13 @@ Développer une application simulant la gestion d'une banque.
 3. Développer l'application dans ce dossier
 4. Sauver chaque étape avec un "Commit" 
 5. Faire une "Pull request" pour m'envoyer votre travail
+
+#bank exo1
+Créez un nouveau projet sur base de https://github.com/jeremykairis/bank-2025.
+1. Créer une classe « Person » implémentant :
+• Les propriétés publiques
+• string FirstName
+• string LastName
+• DateTime BirthDate
+Banque
+Exercice
