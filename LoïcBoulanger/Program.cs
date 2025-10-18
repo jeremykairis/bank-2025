@@ -1,4 +1,5 @@
 using LoïcBoulanger.Components;
+using LoïcBoulanger.Classes;
 
 var builder = WebApplication.CreateBuilder(args);
 
