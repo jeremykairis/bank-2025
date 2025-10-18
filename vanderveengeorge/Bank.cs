@@ -24,19 +24,28 @@ class Bank(Dictionary<string, CurrentAccount> accounts, string name)
             Console.WriteLine("Le compte n'existe pas !");
         }
     }
+    public void GetBalance(string number)
+    {
+        if (Accounts.ContainsKey(number))
+        {
+            Console.WriteLine($"Compte : {number} | Solde : {Accounts[number].Balance}€");
+        }
+        else
+        {
+            Console.WriteLine($"Le compte {number} n'existe pas");
+        }
+    }
     public void GetAccountsInfos(Person user)
     {
         double totalBalance = 0;
         bool hasAccount = false;
         foreach (CurrentAccount account in Accounts.Values)
         {
-            if (user.FirstName == account.Owner.FirstName
-            && user.LastName == account.Owner.LastName
-            && user.BirthDate == account.Owner.BirthDate)
+            if (user == account.Owner)
             {
                 totalBalance += account.Balance;
                 hasAccount = true;
-                account.GetBalance();
+                GetBalance(account.Number);
             }
         }
         if (hasAccount)
