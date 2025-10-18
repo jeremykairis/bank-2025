@@ -10,7 +10,7 @@ Person client3 = new Person("Nikola", "Tesla", new DateTime(1856, 7, 10));
 
 Console.WriteLine($"\nCréation du client 1: {client1.FirstName} {client1.LastName}");
 Console.WriteLine($"Création du client 2: {client2.FirstName} {client2.LastName}");
-Console.WriteLine($"\nCréation du client 3: {client3.FirstName} {client3.LastName}");
+Console.WriteLine($"Création du client 3: {client3.FirstName} {client3.LastName}");
 
 public class Person
 {
@@ -55,6 +55,32 @@ public class CurrentAccount
         {
             Console.WriteLine($"Compte {Number}: Erreur de dépôt. Le montant doit être positif.");
         }
+    }
+    // Méthode publique pour le retrait
+    public void Withdraw(double amount)
+    {
+        if (amount <= 0)
+        {
+            Console.WriteLine($"Compte {Number}: Erreur de retrait. Le montant doit être positif.");
+            return;
+        }
+
+        double allowedThreshold = -CreditLine;
+
+        if (Balance - amount >= allowedThreshold)
+        {
+            Balance -= amount;
+            Console.WriteLine($"Compte {Number}: - {amount:C2} (Retrait). Nouveau solde: {Balance:C2}");
+        }
+        else
+        {
+            Console.WriteLine($"Compte {Number}: Retrait de {amount:C2} refusé. Le solde disponible ({Balance + CreditLine:C2}) est insuffisant.");
+        }
+    }
+    // Méthode publique pour le retrait
+    public double GetBalance()
+    {
+        return Balance;
     }
 
 }
