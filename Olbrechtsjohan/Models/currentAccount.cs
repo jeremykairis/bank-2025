@@ -1,44 +1,39 @@
 using System;
-using System.Dynamic;
 using Models;
 
-public class CurrentAccount
+namespace Models
 {
-    public string number { get; set; }
-    public readonly decimal balance { get; set; }
+    public class CurrentAccount : Account
+    {
+        public decimal LineOfCredit { get; set; }
 
-    public DateTime DateLastWithdraw { get; set; }
-
-    public string LastName { get; set; }
-
-   public void Withdraw(decimal amount)
+        public CurrentAccount(string number, Person owner, decimal initialBalance = 0)
+            : base(number, owner, initialBalance)
         {
-            if (amount <= 0)
+            LineOfCredit = 0;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            base.Withdraw(amount);
+
+            if (amount > Balance + LineOfCredit)
             {
-                Console.WriteLine("montant +.");
+                Console.WriteLine("Le montant du retrait dépasse le solde et la ligne de crédit.");
                 return;
             }
-            if (amount > Balance)
-            {
-                Console.WriteLine("sold insuffiasand.");
-                return;
-            }
+
             Balance -= amount;
-            Console.WriteLine($"${amount} he ${Balance}");
+            Console.WriteLine($"Retrait de ${amount} effectué. Nouveau solde : ${Balance}");
         }
-    public void Deposit(decimal amount)
+
+        protected override decimal CalculateInterest()
         {
-            if (amount <= 0)
+            if (Balance >= 0)
             {
-                Console.WriteLine("le montant doit etre +e.");
-                return;
+                return Balance * 0.03m;
             }
-
-            Balance += amount;
-            Console.WriteLine($"${amount} felisitation nouvlle balance ${Balance}");
+            return Balance * 0.0975m;
         }
-
-
-
-
+    }
 }

@@ -2,13 +2,14 @@ using System;
 
 namespace Models
 {
-    abstract class Account
+    public abstract class Account
     {
         public string Number { get; }
         public decimal Balance { get; protected set; }
         public Person Owner { get; }
 
-        abstract public Account(string number, Person owner, decimal initialBalance = 0)
+
+        protected Account(string number, Person owner, decimal initialBalance = 0)
         {
             if (string.IsNullOrWhiteSpace(number))
             {
@@ -24,19 +25,21 @@ namespace Models
         {
             if (amount <= 0)
             {
-                Console.WriteLine("Deposit amount must be positive.");
+                Console.WriteLine("Le montant du dépôt doit être positif.");
                 return;
             }
             Balance += amount;
-            Console.WriteLine($"Deposit of ${amount} successful. New balance: ${Balance}");
+            Console.WriteLine($"Dépôt de ${amount} effectué. Nouveau solde : ${Balance}");
         }
 
         public virtual void Withdraw(decimal amount)
         {
             if (amount <= 0)
             {
-                Console.WriteLine("Withdrawal amount must be positive.");
+                Console.WriteLine("Le montant du retrait doit être positif.");
             }
         }
+
+        protected abstract decimal CalculateInterest();
     }
 }

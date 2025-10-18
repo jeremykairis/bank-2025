@@ -28,7 +28,7 @@ namespace Models
 
         public void DisplayInfo()
         {
-            Console.WriteLine($"First Name: {FirstName}, Last Name: {LastName}, Age: {CalculateAge()}");
+            Console.WriteLine($"Prénom: {FirstName}, Nom: {LastName}, Âge: {CalculateAge()}");
         }
     }
 
@@ -56,16 +56,16 @@ namespace Models
             if (newAccount != null)
             {
                 Accounts.Add(newAccount);
-                Console.WriteLine($"Account {newAccount.Number} for {newAccount.Owner.FirstName} {newAccount.Owner.LastName} has been added.");
+                Console.WriteLine($"Le compte {newAccount.Number} pour {newAccount.Owner.FirstName} {newAccount.Owner.LastName} a été ajouté.");
             }
         }
 
         public void DisplayAccountsList()
         {
-            Console.WriteLine($"\n--- compte de  {Name} ---");
+            Console.WriteLine($"\n--- Comptes de la banque {Name} ---");
             foreach (var account in Accounts)
             {
-                Console.WriteLine($"Account: {account.Number}, Propietaire: {account.Owner.FirstName} {account.Owner.LastName}, Balance: ${account.Balance}");
+                Console.WriteLine($"Compte : {account.Number}, Propriétaire : {account.Owner.FirstName} {account.Owner.LastName}, Solde : ${account.Balance}");
             }
         }
     }

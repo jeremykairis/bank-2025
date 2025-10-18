@@ -17,13 +17,18 @@ namespace Models
 
             if (amount > Balance)
             {
-                Console.WriteLine("insufficient funds.");
+                Console.WriteLine("Solde insuffisant.");
                 return;
             }
 
             Balance -= amount;
             DateLastWithdraw = DateTime.Now;
-            Console.WriteLine($" retrai ${amount} . nouvelle: ${Balance}");
+            Console.WriteLine($"Retrait de ${amount} effectué. Nouveau solde : ${Balance}");
+        }
+
+        protected override decimal CalculateInterest()
+        {
+            return Balance * 0.045m;
         }
     }
 }
