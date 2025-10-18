@@ -1,6 +1,6 @@
 class Bank(Dictionary<string, CurrentAccount> accounts, string name)
 {
-    public Dictionary<string, CurrentAccount> Accounts { get; private set; } = accounts;
+    public Dictionary<string, CurrentAccount> Accounts { get; } = accounts;
     public string Name { get; set; } = name;
     public void AddAccount(CurrentAccount account)
     {
@@ -21,7 +21,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts, string name)
         }
         else
         {
-            Console.WriteLine("Le compte n'existe pas !");
+            Console.WriteLine("Suppression impossible, le compte n'existe pas !");
         }
     }
     public void GetBalance(string number)
@@ -32,7 +32,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts, string name)
         }
         else
         {
-            Console.WriteLine($"Le compte {number} n'existe pas");
+            Console.WriteLine($"Le compte {number} n'existe pas !");
         }
     }
     public void GetAccountsInfos(Person user)

@@ -1,13 +1,9 @@
-class CurrentAccount(string number, double balance, double creditLine, Person owner)
+class CurrentAccount(string number, double balance, double creditLine, Person owner) : Account(number, balance, owner)
 {
-    public string Number { get; set; } = number;
-    public double Balance { get; private set; } = balance;
     public double CreditLine { get; set; } = creditLine;
-    public Person Owner { get; set; } = owner;
-
-    public void Withdraw(double amount)
+    public override void Withdraw(double amount)
     {
-        if (amount > Balance)
+        if (amount > Balance + CreditLine)
         {
             Console.WriteLine("Solde insufisant");
         }
@@ -15,9 +11,7 @@ class CurrentAccount(string number, double balance, double creditLine, Person ow
         {
             Balance -= amount;
         }
+
     }
-    public void Deposit(double amount)
-    {
-        Balance += amount;
-    }
+
 }
