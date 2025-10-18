@@ -23,3 +23,25 @@ void DeleteAccount(string number)
 4. Ajouter une methode qui retourne le solde d'un compte courant
 5. Permettre a la banque de donner la somme de tous les comptes d'une personne
 */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime BirthDate { get; set; }
+
+    public Person(string firstName, string lastName, DateTime birthDate)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        BirthDate = birthDate;
+    }
+}
+
+
+
+
