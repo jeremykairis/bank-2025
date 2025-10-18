@@ -35,3 +35,20 @@ c. Creer une classe Bank pour gerer les comptes courants implementant:
 d. Ajouter une methode qui retourne le solde d'un compte courant
 
 e. Permettre a la banque de donner la somme de tous les comptes d'une personne
+
+f. Creer une classe << SavingsAccount >> pour la gestion d'un carnet d'epargne implementant
+    - Les propriétés publiques.
+        - string Number
+        - double Balance (lecture seule)
+        - Date Time DateLastWithdraw
+        - Person owner
+    - Une méthode publique:
+        - void Withdraw(double amount)
+        - void Deposit (double amount)
+        
+7- Définir la classe <Account> reprenant les parties commune aux classes <CurrentAccount>
+ et <SavingsAccount> en utilisant les concepts d'héritage, de redéfinition de méthodes et si besoin, de surcharcge
+ de méthodes et d'encapsulation.
+ Attention le niveau d'accessibilité du mutateur de la propriété Balance doit rester <private>
+
+ 

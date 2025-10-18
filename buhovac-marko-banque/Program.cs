@@ -25,6 +25,31 @@ bnp.AddAccount(account3);
 
 Console.WriteLine($"\nLa banque '{bnp.Name}' a été créée et gère {bnp.Accounts.Count} comptes.");
 
+// 4. Test des opérations sur les comptes
+Console.WriteLine("\n--- OPÉRATIONS BANCAIRES ---");
+
+Console.WriteLine($"Solde initial de {client1.FirstName} (Compte {account1.Number}): {account1.GetBalance():C2}");
+account1.Deposit(100.00);
+account1.Withdraw(300.00);
+account1.Withdraw(1500.00);
+
+Console.WriteLine($"\nSolde de {client2.FirstName} (Compte {account3.Number}): {account3.GetBalance():C2}");
+account3.Withdraw(5005.00);
+
+// 5. Test de la méthode de rapport global (Somme des comptes d'une personne)
+Console.WriteLine("\n--- RAPPORT GLOBAL DE LA BANQUE ---");
+
+double totalMarko = bnp.GetTotalBalanceForPerson(client1);
+Console.WriteLine($"Solde total pour {client1.FirstName} {client1.LastName}: {totalMarko:C2}");
+
+double totalMax = bnp.GetTotalBalanceForPerson(client2);
+Console.WriteLine($"Solde total pour {client2.FirstName} {client2.LastName}: {totalMax:C2}");
+
+// Test de suppression de compte
+Console.WriteLine("\n--- GESTION DES COMPTES ---");
+bnp.DeleteAccount(account3.Number);
+Console.WriteLine($"Le compte {account3.Number} a été supprimé.");
+Console.WriteLine($"La banque gère maintenant {bnp.Accounts.Count} comptes.");
 
 public class Person
 {
