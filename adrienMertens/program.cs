@@ -22,4 +22,27 @@ class CurrentAccount
     }
 }
 
+class Bank
+{
+    private readonly Dictionary<string, CurrentAccount> _accounts
+    private string name;
+    
+    public void AddAccount(CurrentAccount account)
+    {
+        
+    }
 
+    public void DeleteAccount(string number)
+    {
+        
+    }
+
+    public double ReturnSoldeCurrentAccount()
+    {
+        
+    }
+    public void ShowAllCurrentAccounts()
+    {
+        
+    }
+}
