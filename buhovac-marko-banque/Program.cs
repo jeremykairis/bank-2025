@@ -17,6 +17,15 @@ CurrentAccount account1 = new CurrentAccount("FR12345", 500.00, 1000.00, client1
 CurrentAccount account2 = new CurrentAccount("FR67890", 2500.50, 500.00, client1);
 CurrentAccount account3 = new CurrentAccount("US98765", 10.00, 5000.00, client2);
 
+// 3. Création de la Banque et ajout des comptes
+Bank bnp = new Bank("BNP Paribas");
+bnp.AddAccount(account1);
+bnp.AddAccount(account2);
+bnp.AddAccount(account3);
+
+Console.WriteLine($"\nLa banque '{bnp.Name}' a été créée et gère {bnp.Accounts.Count} comptes.");
+
+
 public class Person
 {
     public string FirstName { get; set; }
