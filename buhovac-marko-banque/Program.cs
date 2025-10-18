@@ -1,32 +1,16 @@
-﻿/* 
-1. Creer une classe Person implementant
-Les proprietes publique
-string FirstName
-string LastName
-DateTime BirthDate
-2. Creer une classe CurrentAccount qui permet la gestion d'un compte courant implementant:
-Les proprietes publique
-string Number
-double Balance (lecture seule)
-double CreditLine
-Person Owner
-Les Methid publiques
-void Withdraw(double amount)
-void Deposit(double amount)
-3. Creer une classe Bank pour gerer les comptes courants implementant:
-Les proprietes
-Dictionary<string, CurrentAccount> Accounts (lecture seule)
-string Name
-Les Methodes publiques
-void AddAccount(CurrentAccount account)
-void DeleteAccount(string number)
-4. Ajouter une methode qui retourne le solde d'un compte courant
-5. Permettre a la banque de donner la somme de tous les comptes d'une personne
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+// 1. Création des Personnes
+Person client1 = new Person("Marko", "Buhovac", new DateTime(1867, 11, 7));
+Person client2 = new Person("Max", "Verstappen", new DateTime(1879, 3, 14));
+Person client3 = new Person("Nikola", "Tesla", new DateTime(1856, 7, 10));
+
+Console.WriteLine($"\nCréation du client 1: {client1.FirstName} {client1.LastName}");
+Console.WriteLine($"Création du client 2: {client2.FirstName} {client2.LastName}");
+Console.WriteLine($"\nCréation du client 3: {client3.FirstName} {client3.LastName}");
 
 public class Person
 {
@@ -40,6 +24,39 @@ public class Person
         LastName = lastName;
         BirthDate = birthDate;
     }
+}
+
+public class CurrentAccount
+{
+    public string Number { get; private set; }
+    
+    public double Balance { get; private set; } 
+    
+    public double CreditLine { get; set; }
+    public Person Owner { get; private set; }
+
+    public CurrentAccount(string number, double initialBalance, double creditLine, Person owner)
+    {
+        Number = number;
+        Balance = initialBalance;
+        CreditLine = creditLine;
+        Owner = owner;
+    }
+
+    // Méthode publique pour le dépôt
+    public void Deposit(double amount)
+    {
+        if (amount > 0)
+        {
+            Balance += amount;
+            Console.WriteLine($"Compte {Number}: + {amount:C2} (Dépôt). Nouveau solde: {Balance:C2}");
+        }
+        else
+        {
+            Console.WriteLine($"Compte {Number}: Erreur de dépôt. Le montant doit être positif.");
+        }
+    }
+
 }
 
 
