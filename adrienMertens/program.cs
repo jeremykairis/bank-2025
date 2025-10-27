@@ -46,7 +46,14 @@ class CurrentAccount
     }
     public void Deposit(double amount)
     {
-        
+        if (amount <= 0)
+        {
+            Console.WriteLine("Erreur : le montant doit être positif");
+            return;
+        }
+
+        Balance += amount;
+        Console.WriteLine($"Dépôt de {amount} effectué avec succès.");
     }
 }
 
@@ -91,6 +98,7 @@ class Program
         var account = new CurrentAccount("BE123456789", person, 1000);
         
         bank.AddAccount(account);
+        account.Deposit(2000);
         account.WithDraw(100);
     }
     
