@@ -37,8 +37,7 @@
         {
             if (amount <= 0)
             {
-                Console.WriteLine("Le montant du dépôt doit être positif.");
-                return;
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du dépôt doit être supérieur à 0.");
             }
 
             Balance += amount;
