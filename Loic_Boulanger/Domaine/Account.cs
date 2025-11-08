@@ -16,6 +16,7 @@ public interface IBankAccount : IAccount
 
 
 public abstract class Account:IBankAccount
+
 {
     // --- Propriétés publiques ---
     public string Number { get; set; }               // Numéro de compte
