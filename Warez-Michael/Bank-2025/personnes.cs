@@ -7,10 +7,21 @@ les propiétés publiques : Nom,Prénom,Anniversaire
 
 class Person
 {
-    public required string FirstName { get; set; }
+    public string FirstName { get; set; }
 
-    public required string LastName { get; set; }
+    public string LastName { get; set; }
 
-    public required DateTime BirthDate { get; set; }
+    public DateTime BirthDate { get; set; }
+
+    public Person(string firstName, string lastName, DateTime birthDate)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        BirthDate = birthDate;
+    }
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName}, Born on: {BirthDate:d}";
+    }
 }
 
