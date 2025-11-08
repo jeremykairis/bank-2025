@@ -10,8 +10,8 @@ public interface IAccount
 public interface IBankAccount : IAccount 
 {
 	string Number { get; }            // Lecture seule du numéro de compte
-	Person Owner { get; }             // Lecture seule du propriétaire
-	void ApplyInterests();            // Méthode d'application des intérêts
+	Person Owner { get;  }             // Lecture seule du propriétaire
+	void ApplyInterest();            // Méthode d'application des intérêts
 }
 
 
@@ -19,11 +19,11 @@ public abstract class Account:IBankAccount
 
 {
     // --- Propriétés publiques ---
-    public string Number { get; set; }               // Numéro de compte
+    public required Number { get; set; }               // Numéro de compte
     
     public double Balance { get; private set; }      // Solde (lecture seule)
     
-    public Person Owner { get; set; } 
+    public required Owner { get; set; } 
     
     // --- Constructeur ---
     
@@ -65,12 +65,12 @@ public abstract class Account:IBankAccount
     }
 
     // ✅ Méthode abstraite protégée
-    protected abstract double CalculInterets();
+    protected abstract double CalculInterest();
 
-    public void ApplyInterests()
+    public void ApplyInterest()
     {
-        double interets = CalculInterets();
-        Balance += interets;
-        Console.WriteLine($"Intérêts de {interets:C} appliqués. Nouveau solde : {Balance:C}");
+        double interest = CalculInterets();
+        Balance += interest;
+        Console.WriteLine($"Intérêts de {interest:C} appliqués. Nouveau solde : {Balance:C}");
     }
 }

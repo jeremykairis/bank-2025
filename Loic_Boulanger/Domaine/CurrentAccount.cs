@@ -29,7 +29,7 @@ public class CurrentAccount : Account
         base.Withdraw(amount); // Call only once, after checks
     }
 
-    protected override double CalculInterets()
+    protected override double CalculInterest()
     {
         if (Balance <= 0)
         {
@@ -39,7 +39,6 @@ public class CurrentAccount : Account
         {
             return Balance * 0.0975;
         }
-
-        return Balance * 0.045;
+        
     }
 }

@@ -16,7 +16,7 @@ public class Bank
     }
 
     // --- Méthode pour ajouter un compte ---
-    public void AddAccount(CurrentAccount account)
+    public void AddAccount(IBankAccount account)
     {
         if (Accounts.ContainsKey(account.Number))
         {
