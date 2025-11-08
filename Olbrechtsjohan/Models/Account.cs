@@ -1,8 +1,9 @@
 using System;
+using Abstraction;
 
 namespace Models
 {
-    public abstract class Account
+    public abstract class Account: IAccount
     {
         public string Number { get; }
         public decimal Balance { get; protected set; }
@@ -11,7 +12,7 @@ namespace Models
 
         protected Account(string number, Person owner, decimal initialBalance = 0)
         {
-            if (number <= 0)
+            if (string.IsNullOrWhiteSpace(number))
             {
                 throw new ArgumentException("Account number cannot be empty.", nameof(number));
             }
@@ -40,14 +41,13 @@ namespace Models
             }
         }
 
-        protected abstract decimal CalculateInterest(decimal balance)    
+        protected abstract decimal CalculateInterest();
+
+        public void ApplyInterest()
         {
-            if (Balance >= 0)
-            {
-                return Balance * 0.03;
-            }
-            return Balance * 0.0;
+            decimal interest = CalculateInterest();
+            Balance += interest;
+            Console.WriteLine($"Intérêts de ${interest:F2} appliqués. Nouveau solde : ${Balance:F2}");
         }
-    
     }
 }

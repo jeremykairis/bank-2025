@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 namespace Models
 {
     public class Person
@@ -43,15 +42,15 @@ namespace Models
     public class Banque
     {
         public string Name { get; set; }
-        public List<Account> Accounts { get; private set; }
+        public List<CurrentAccount> Accounts { get; private set; }
 
         public Banque(string name)
         {
             Name = name;
-            Accounts = new List<Account>();
+            Accounts = new List<CurrentAccount>();
         }
 
-        public void AddAccount(Account newAccount)
+        public void AddAccount(CurrentAccount newAccount)
         {
             if (newAccount != null)
             {
