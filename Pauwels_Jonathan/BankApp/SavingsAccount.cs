@@ -6,35 +6,21 @@ namespace BankApp
     {
         public DateTime DateLastWithdraw { get; private set; }
 
-        // Constructeur standard
-        public SavingsAccount(string number, Person owner) 
+        public SavingsAccount(string number, Person owner)
             : base(number, owner)
         {
             DateLastWithdraw = DateTime.MinValue;
         }
 
-        // Constructeur avec solde initial
-        public SavingsAccount(string number, Person owner, double initialBalance) 
-            : base(number, owner, initialBalance)
-        {
-            DateLastWithdraw = DateTime.MinValue;
-        }
-
-        public override void Deposit(double amount)
-        {
-            if (amount <= 0)
-                throw new ArgumentException("Le montant du dépôt doit être positif.");
-            Balance += amount;
-        }
+        public override void Deposit(double amount) => base.Deposit(amount);
 
         public override void Withdraw(double amount)
         {
             if (amount <= 0)
-                throw new ArgumentException("Le montant du retrait doit être positif.");
-
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du retrait doit être supérieur à zéro.");
             if (Balance - amount < 0)
-                throw new InvalidOperationException("Solde insuffisant pour un compte épargne.");
-
+                throw new InsufficientBalanceException("Solde insuffisant pour un compte épargne.");
+            
             Balance -= amount;
             DateLastWithdraw = DateTime.Now;
         }

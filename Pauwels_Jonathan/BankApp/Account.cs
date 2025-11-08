@@ -2,13 +2,12 @@ using System;
 
 namespace BankApp
 {
-    public abstract class Account : IBankAccount
+    public abstract class Account
     {
         public string Number { get; private set; }
         public Person Owner { get; private set; }
         public double Balance { get; protected set; }
 
-        // Constructeur numéro + propriétaire
         public Account(string number, Person owner)
         {
             Number = number;
@@ -16,16 +15,21 @@ namespace BankApp
             Balance = 0.0;
         }
 
-        // Constructeur numéro + propriétaire + solde initial
-        public Account(string number, Person owner, double balance)
+        public virtual void Deposit(double amount)
         {
-            Number = number;
-            Owner = owner;
-            Balance = balance;
+            if (amount <= 0)
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du dépôt doit être supérieur à zéro.");
+            Balance += amount;
         }
 
-        public abstract void Deposit(double amount);
-        public abstract void Withdraw(double amount);
+        public virtual void Withdraw(double amount)
+        {
+            if (amount <= 0)
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du retrait doit être supérieur à zéro.");
+            if (Balance < amount)
+                throw new InsufficientBalanceException("Solde insuffisant pour effectuer le retrait.");
+            Balance -= amount;
+        }
 
         protected abstract double CalculInterets();
 

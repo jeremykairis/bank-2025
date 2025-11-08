@@ -4,46 +4,46 @@ namespace BankApp
 {
     public class CurrentAccount : Account
     {
-        public double CreditLine { get; private set; }
+        private double creditLine;
 
-        // Constructeur standard
-        public CurrentAccount(string number, Person owner, double creditLine) 
+        public double CreditLine
+        {
+            get => creditLine;
+            private set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException(nameof(value), "La ligne de crédit doit être >= 0.");
+                creditLine = value;
+            }
+        }
+
+        public CurrentAccount(string number, Person owner, double creditLine)
             : base(number, owner)
         {
             CreditLine = creditLine;
         }
 
-        // Constructeur avec solde initial
-        public CurrentAccount(string number, Person owner, double creditLine, double initialBalance) 
-            : base(number, owner, initialBalance)
+        public CurrentAccount(string number, Person owner, double creditLine, double initialBalance)
+            : base(number, owner)
         {
             CreditLine = creditLine;
+            Balance = initialBalance;
         }
 
-        public override void Deposit(double amount)
-        {
-            if (amount <= 0)
-                throw new ArgumentException("Le montant du dépôt doit être positif.");
-            Balance += amount;
-        }
+        public override void Deposit(double amount) => base.Deposit(amount);
 
         public override void Withdraw(double amount)
         {
             if (amount <= 0)
-                throw new ArgumentException("Le montant du retrait doit être positif.");
-
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du retrait doit être > 0.");
             if (Balance - amount < -CreditLine)
-                throw new InvalidOperationException("Solde insuffisant ou dépassement de la ligne de crédit.");
-
+                throw new InsufficientBalanceException("Solde insuffisant ou dépassement de la ligne de crédit.");
             Balance -= amount;
         }
 
         protected override double CalculInterets()
         {
-            if (Balance > 0)
-                return Balance * 0.03;
-            else
-                return Balance * 0.0975;
+            return Balance > 0 ? Balance * 0.03 : Balance * 0.0975;
         }
 
         public override string ToString()
@@ -52,3 +52,4 @@ namespace BankApp
         }
     }
 }
+
