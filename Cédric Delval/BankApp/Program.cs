@@ -1,14 +1,14 @@
 ﻿public class Person(string firstName, string lastName, DateTime birthDate) 
 {
     public string FirstName {get; set;} = firstName;
-    public string LastName {get; private set;} = lastName;
+    public string LastName {get; set;} = lastName;
     public DateTime BirthDate {get; set;} = birthDate;
 }
 
 public class CurrentAccount
 {
     public string Number { get; set; }
-    public double Balance { get; set; } 
+    public double Balance { get; private set; } 
     public double CreditLine { get; set; }
     public Person Owner { get; set; }
 
