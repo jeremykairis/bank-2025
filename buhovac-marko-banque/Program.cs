@@ -226,3 +226,26 @@ public class Bank
         return total;
     }
 }
+
+abstract class Account
+{
+    public string Number { get; private set; }
+    public double Balance { get; protected set; } 
+    public Person Owner { get; private set; }
+
+    public Account(string number, double initialBalance, Person owner)
+    {
+        Number = number;
+        Balance = initialBalance;
+        Owner = owner;
+    }
+
+    protected abstract double CalculInterets();
+
+    public void ApplyInterest()
+    {
+        double interest = CalculInterets();
+        Balance += interest;
+        Console.WriteLine($"Compte {Number}: + {interest:C2} (Intérêts appliqués). Nouveau solde: {Balance:C2}");
+    }
+}
