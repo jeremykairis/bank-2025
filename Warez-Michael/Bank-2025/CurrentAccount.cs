@@ -8,7 +8,8 @@ class CurrentAccount(string nombre,double balance, double creditline, Person Own
 
 {
     public string Nombre { get; set; } = nombre;
-    public double Balance { get; } = balance;
+    private double _balance = balance;
+    public double Balance => _balance;
     public double creditline { get; set; } = creditline;
 
     public Person owner { get; set; } = Owner;
@@ -16,16 +17,16 @@ class CurrentAccount(string nombre,double balance, double creditline, Person Own
     {
         if (amount > Balance)
         {
-            Console.Writline("Solde insufisant");
+            Console.WriteLine("Solde insufisant");
         }
         else
         {
-           Balance -= amount;
+            _balance -= amount;
         }
     }
+
     public void Deposit(double amount)
     {
-        Balance += amount;
+        _balance += amount;
     }
-
 }
