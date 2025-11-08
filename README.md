@@ -84,3 +84,14 @@ un accès en lecture au « Owner » et au « Number ».
 « SavingsAccount » afin de spécifier leur mutateur en « private ».
 
 17. Définir ce qu’il manque pour que le programme continue à tourner.
+
+18. Dans la classe « Account » :
+• Au niveau de la méthode « Deposit », déclenchez une exception de type
+« ArgumentOutOfRangeException » si le montant n’est pas supérieur à 0 (zéro).
+• Faites de même au niveau de la méthode « Withdraw » et y ajouter le déclenchement
+d’une exception de type « InsufficientBalanceException » si le montant ne peut être
+retiré.
+
+19. Au niveau de la classe « CurrentAccount » :
+• Au niveau de la propriété « CreditLine », déclenchez une exception de type
+« ArgumentOutOfRangeException » si la valeur n’est pas supérieur ou égale à 0 (zéro).
