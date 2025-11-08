@@ -2,10 +2,10 @@ using System;
 
 namespace BankApp
 {
-    public abstract class Account
+    public abstract class Account : IBankAccount
     {
-        public string Number { get; set; }
-        public Person Owner { get; set; }
+        public string Number { get; private set; }
+        public Person Owner { get; private set; }
         public double Balance { get; protected set; } // lecture seule externe, modifiable seulement à l'intérieur
 
         public Account(string number, Person owner)
