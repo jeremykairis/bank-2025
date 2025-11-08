@@ -1,6 +1,21 @@
 ﻿namespace Loic_Boulanger.Domaine;
 
-public abstract class Account
+public interface IAccount
+{
+	double Balance { get; }           // Lecture seule du solde
+	void Deposit(double amount);      // Méthode de dépôt
+	void Withdraw(double amount);     // Méthode de retrait
+}
+
+public interface IBankAccount : IAccount 
+{
+	string Number { get; }            // Lecture seule du numéro de compte
+	Person Owner { get; }             // Lecture seule du propriétaire
+	void ApplyInterests();            // Méthode d'application des intérêts
+}
+
+
+public abstract class Account:IBankAccount
 {
     // --- Propriétés publiques ---
     public string Number { get; set; }               // Numéro de compte
