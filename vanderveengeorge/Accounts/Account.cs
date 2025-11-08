@@ -1,4 +1,4 @@
-abstract class Account(string number, double balance, Person owner)
+abstract class Account(string number, double balance, Person owner) : IAccount
 {
     public string Number { get; set; } = number;
     public double Balance { get; private set; } = balance;
