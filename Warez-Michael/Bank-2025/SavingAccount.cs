@@ -1,55 +1,69 @@
 using System;
 
-class SavingAccount
+public class SavingAccount : IBankAccount
 {
-    public string Nombre { get; set; }
+    public string Number { get; set; }
     public double Balance { get; private set; }
     public double InterestRate { get; private set; }
     public DateTime DateLastWithdraw { get; private set; }
-    private Person owner;
+    
 
-    public SavingAccount(string nombre, double balance, double interestRate, Person owner)
+    // Constructeur principal
+    public SavingAccount(string number, double balance, double interestRate)
     {
-        Nombre = nombre;
+    
+        Number = number;
         Balance = balance;
         InterestRate = interestRate;
         DateLastWithdraw = DateTime.MinValue;
-        this.owner = owner;
+        
     }
 
+    // Constructeur simplifié
+    
+    public SavingAccount(string number) : this(number, 0.0, 0.02)
+    {
+    }
+
+    // Appliquer les intérêts
     public void ApplyInterest()
     {
         Balance += Balance * InterestRate;
     }
 
-    public void Withdraw(double amount)
-    {
-        if ((DateTime.Now - DateLastWithdraw).TotalDays >= 30)
-        {
-            if (amount <= Balance)
-            {
-                Balance -= amount;
-                DateLastWithdraw = DateTime.Now;
-            }
-            else
-            {
-                Console.WriteLine("Solde insuffisant.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Retrait refusé : vous devez attendre 30 jours entre deux retraits.");
-        }
-    }
-
+    // Dépôt
     public void Deposit(double amount)
     {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Le montant du dépôt doit être positif.");
+            return;
+        }
         Balance += amount;
     }
 
-    // Constructeur simplifié
-    public SavingAccount(string nombre, Person owner)
-        : this(nombre, 0.0, 0.0, owner)
+    // Retrait avec délai de 30 jours
+    public void Withdraw(double amount)
     {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Le montant du retrait doit être positif.");
+            return;
+        }
+
+        if ((DateTime.Now - DateLastWithdraw).TotalDays < 30)
+        {
+            Console.WriteLine("Retrait refusé : vous devez attendre 30 jours entre deux retraits.");
+            return;
+        }
+
+        if (amount > Balance)
+        {
+            Console.WriteLine("Solde insuffisant.");
+            return;
+        }
+
+        Balance -= amount;
+        DateLastWithdraw = DateTime.Now;
     }
 }
