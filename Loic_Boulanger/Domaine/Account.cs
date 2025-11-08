@@ -69,7 +69,7 @@ public abstract class Account:IBankAccount
 
     public void ApplyInterest()
     {
-        double interest = CalculInterets();
+        double interest = CalculInterest();
         Balance += interest;
         Console.WriteLine($"Intérêts de {interest:C} appliqués. Nouveau solde : {Balance:C}");
     }
