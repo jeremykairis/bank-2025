@@ -2,7 +2,10 @@ public class Bank
 {
     public Dictionary<string, Account> Accounts { get; } = new();
     public string Name { get; set; }
-    
+    public void NegativeBalanceAction(Account account)
+    {
+        Console.WriteLine($"Le numéro de compte {account.Number} vient de passer en négatif");
+    }
     public Bank(string name)
     {
         Name = name;
@@ -13,6 +16,8 @@ public class Bank
         if (!Accounts.ContainsKey(account.Number))
         {
             Accounts.Add(account.Number, account);
+            account.NegativeBalanceEvent += NegativeBalanceAction;
+
         }
         else
         {

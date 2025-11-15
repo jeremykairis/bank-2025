@@ -1,7 +1,13 @@
 public abstract class Account : IBankAccount
 {
+    public event Action<Account> NegativeBalanceEvent;
+    
+    protected void OnNegativeBalance()
+    {
+        NegativeBalanceEvent?.Invoke(this);
+    }
     public string Number { get; private set; }
-    public double Balance { get; private set; }
+    public double Balance { get; set; }
     public Person Owner { get; private set; }
 
     public Account(string number, Person owner)

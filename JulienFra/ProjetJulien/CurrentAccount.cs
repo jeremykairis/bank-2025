@@ -20,7 +20,11 @@ public class CurrentAccount : Account
             throw new InsufficientBalanceException("Fond insuffisant");
         }
 
-        base.Withdraw(amount);
+        Balance -= amount;
+        if (Balance < 0)
+        {
+            OnNegativeBalance();
+        }
     }
 
     protected override double CalculInterets()
@@ -30,5 +34,7 @@ public class CurrentAccount : Account
         else
             return Balance * 0.0975;
     }
+
+    
 }
 

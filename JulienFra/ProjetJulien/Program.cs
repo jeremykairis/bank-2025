@@ -16,13 +16,11 @@ bank.AddAccount(anotherCurrent); // doit afficher "Ce compte existe déjà !"
 current.Deposit(10);
 savings.Deposit(1000);
 
-// --- Test 4 : Retraits ---
-current.Withdraw(10); // autorisé grâce au CreditLine
-savings.Withdraw(200);
+
 
 try
 {
-    current.Withdraw(0);
+    current.Withdraw(15);
 }
 catch (ArgumentOutOfRangeException ex)
 {
