@@ -30,38 +30,26 @@ namespace Models
 
         public virtual void Deposit(decimal amount)
         {
-            try
+            if (amount <= 0)
             {
-                 if (amount <= 0)
-                {
-                throw new ArgumentOutOfRangeException("Le montant du dépôt doit être positif.");
-                
-                }
-                
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du dépôt doit être positif.");
             }
-            catch (System.ArgumentOutOfRangeException)
-            {
-                
-                throw;
-            }
-           
             Balance += amount;
             Console.WriteLine($"Dépôt de ${amount} effectué. Nouveau solde : ${Balance}");
         }
 
         public virtual void Withdraw(decimal amount)
         {
-            try 
+            if (amount <= 0)
             {
-                 if (amount <= 0)
-                {
-                    throw new  InsufficientBalanceException("Le montant du retrait doit être positif.");
-                }
+                throw new ArgumentOutOfRangeException(nameof(amount), "Le montant du retrait doit être positif.");
             }
-            catch (InsufficientBalanceException)
+            if (Balance < amount)
             {
-                throw;
+                throw new InvalidOperationException("Solde insuffisant pour effectuer le retrait.");
             }
+            Balance -= amount;
+            Console.WriteLine($"Retrait de ${amount} effectué. Nouveau solde : ${Balance}");
         }
       
 

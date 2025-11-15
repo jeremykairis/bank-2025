@@ -4,15 +4,31 @@ using Abstraction;
 
 namespace Models
 {
-    public class CurrentAccount : Account
-    {
-        public decimal LineOfCredit { get; set; }
-
-        public CurrentAccount(string number, Person owner) 
-            : base(number, owner)
+   public class CurrentAccount : Account
+{
+    private decimal _lineOfCredit;
+    
+    public decimal LineOfCredit 
+    { 
+        get => _lineOfCredit;
+        set
         {
-            LineOfCredit = 0;
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(LineOfCredit), 
+                    "La ligne de crédit doit être supérieure ou égale à 0.");
+            }
+            _lineOfCredit = value;
         }
+    }
+        public CurrentAccount(string number, Person owner) 
+        : base(number, owner)
+    {
+        LineOfCredit = 0;
+    }
+
+    
+
 
         public override void Withdraw(decimal amount)
         {
