@@ -15,11 +15,19 @@ abstract class Account : IBankAccount
 
     public virtual void Deposit(double amount)
     {
+        ArgumentOutOfRangeException.ThrowIfLessThan(amount, 0);
         Balance += amount;
     }
     public virtual void Withdraw(double amount)
     {
-        Balance -= amount;
+        if (amount <= Balance)
+        {
+            Balance -= amount;
+        }
+        else
+        {
+            throw new InsufficientBalanceException("Solde insufisant !");
+        }
     }
     protected abstract double CalculateInterest();
     public virtual void ApplyInterest()

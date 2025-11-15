@@ -12,6 +12,9 @@ class Program
         Console.WriteLine(compte1.Balance);
         compte1.Withdraw(300000);
         Console.WriteLine(compte1.Balance);
+        compte1.Deposit(-11);
+        Console.WriteLine(compte1.Balance);
+        Console.WriteLine(compte1.Balance);
         Bank bnp = new Bank(new Dictionary<string, IBankAccount>(), "Ma Banque");
         bnp.AddAccount(compte1);
         bnp.AddAccount(compte2);

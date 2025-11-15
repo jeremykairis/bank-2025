@@ -1,6 +1,15 @@
 class CurrentAccount : Account
 {
-    public double CreditLine { get; private set; }
+    private double _creditLine;
+    public double CreditLine
+    {
+        get => _creditLine;
+        private set
+        {
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, 0);
+            _creditLine = value;
+        }
+    }
     public CurrentAccount(string number, Person owner) : base(number, owner) { }
     public CurrentAccount(string number, double balance, double creditLine, Person owner) : base(number, balance, owner)
     {
@@ -10,6 +19,7 @@ class CurrentAccount : Account
     {
         if (amount > Balance + CreditLine)
         {
+
             Console.WriteLine("Solde insufisant");
         }
         else
