@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 abstract class Account : IBankAccount
 {
     public string Number { get; private set; }
@@ -34,7 +36,6 @@ abstract class Account : IBankAccount
     {
         Balance += CalculateInterest();
     }
-    public delegate void NegativeBalanceDelegate(IBankAccount accountToCheck);
-    public event NegativeBalanceDelegate? NegativeBalanceEvent;
+    public event Action<IBankAccount>? NegativeBalanceEvent;
     protected virtual void OnNegativeBalance() => NegativeBalanceEvent?.Invoke(this);
 }
