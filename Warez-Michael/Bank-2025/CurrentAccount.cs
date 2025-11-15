@@ -3,17 +3,23 @@ creer une classe "CurrentAccount" qui permet la gestion d' un compte
 propirété publique : Nombre,double balance(lecture seule), CreditLine ,Owner
 methodes publiques : void Withdraw, void deposit(double amount)
 */
-
+using System;
+// Définition de la classe CurrentAccount qui hérite de Account
 class CurrentAccount(string nombre, double balance, double creditline, Person Owner)
 
+
+
+//: Account(nombre, balance, Owner)
 {
     public string Nombre { get; set; } = nombre;
     private double _balance = balance;
     public double Balance => _balance;
     private decimal _creditLine = (decimal)creditline;
+    internal required object lignecredit;
+
     public Person owner { get; set; } = Owner;
 
-
+    // Méthode pour retirer de l'argent
     public void Withdraw(double amount)
     {
         if (amount > Balance)
@@ -25,31 +31,43 @@ class CurrentAccount(string nombre, double balance, double creditline, Person Ow
             _balance -= amount;
         }
     }
-
+    // Méthode pour déposer de l'argent
     public void Deposit(double amount)
     {
         _balance += amount;
     }
+
+
+
     // Constructeur avec le numéro et le titulaire
     //et le numéro, le titulaire et le solde comme paramètres
-    public CurrentAccount(string nombre, Person owner) :
-        this(nombre, 0.0, 0.0, owner)
-    {
+    public CurrentAccount(string nombre, double balance, Person owner)
+        : this(nombre, balance, 0.0, owner)
+    {   
     }
-    private decimal creditLine;
 
-public decimal CreditLine
-{
-    get { return creditLine; }
-    set
+
+    // Propriété pour la ligne de crédit
+    private decimal creditline;
+    public decimal Creditline
     {
-        if (value < 0)
+        get => creditline;
+        set
         {
-                throw new ArgumentOutOfRangeException(nameof(CreditLine),
-                    "La valeur doit être supérieure ou égale à zéro.");
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value), "La valeur doit être supérieure ou égale à zéro.");
+            creditline = value;
         }
-        creditLine = value;
-    }
-}
 
+    }
+
+    public object CreditLine { get; internal set; }
+
+
+    // Méthode pour mettre à jour la ligne de crédit
+    public void UpdateCreditLine(decimal newCreditLine)
+    {
+        Creditline = newCreditLine;
+        Console.WriteLine("La ligne de crédit a été mise à jour.");
+    }
 }

@@ -1,12 +1,21 @@
 using System;
-
+// Définition de la classe Bank qui gère un ensemble de comptes courants
 class Bank(Dictionary<string, CurrentAccount> accounts,string name)
 {
     public Dictionary<string, CurrentAccount> Accounts { get;  private set; } = accounts;
     public string Name { get; set; } = name;
+    public Bank(string name) : this([], name)
+    {   
+    {
+        Accounts = [];
+        Name = name;
+
+        }
+        
+    }
 
 
-
+// Méthode pour ajouter un compte courant
     public void AddAccount(CurrentAccount account)
     {
         if (Accounts.ContainsKey(account.Nombre))
@@ -17,9 +26,10 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
         {
             Accounts.Add(account.Nombre, account);
         }
-    }
 
-    public void RemoveAccoun(CurrentAccount account, string nombre)
+    }
+// Méthode pour supprimer un compte courant
+    public void RemoveAccount(CurrentAccount account, string nombre)
     {
         if (Accounts.ContainsKey(nombre))
         {
@@ -31,7 +41,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
             Console.WriteLine("Compte inexistant !");
         }
     }
-
+// Méthode pour obtenir le solde d'un compte courant
     public void GetBalance(string nombre)
     {
         if (Accounts.ContainsKey(nombre))
@@ -44,7 +54,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
 
         }
     }
-    
+// Méthode pour obtenir les informations d'un compte courant   
     public void GetAccountInfo(Person user)
     {
         double totalBalance = 0;
@@ -53,11 +63,12 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
         {
             if (account.owner == user)
             {
-                Console.WriteLine($"Compte: {account.Nombre} : Solde: {account.Balance}, Ligne de crédit: {account.creditline}");
+                Console.WriteLine($"Compte: {account.Nombre} : Solde: {account.Balance} : Ligne de crédit: {account.lignecredit}");
                 totalBalance += account.Balance;
                 hasAccount = true;
             }
         }
+// Afficher le solde total ou un message si aucun compte n'est trouvé
         if (!hasAccount)
         {
             Console.WriteLine("Aucun compte trouvé pour cet utilisateur.");
@@ -67,9 +78,42 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
             Console.WriteLine($"Solde total pour {user.FirstName} {user.LastName}: {totalBalance}");
         }
     }
-
+    // Méthode pour supprimer un compte courant
     public void RemoveAccount(CurrentAccount account1)
     {
-        throw new NotImplementedException();
+        if (account1 == null)
+        {
+            Console.WriteLine("Compte invalide !");
+            return;
+        }
+
+        if (Accounts.ContainsKey(account1.Nombre))
+        {
+            Accounts.Remove(account1.Nombre);
+            Console.WriteLine("Le compte est supprimé.");
+        }
+        else
+        {
+            Console.WriteLine("Compte inexistant !");
+        }
+    }
+    
+    // Méthode pour obtenir le solde d'un compte courant
+    public void GetBalance(CurrentAccount account1)
+    {
+        if (account1 == null)
+        {
+            Console.WriteLine("Compte invalide !");
+            return;
+        }
+
+        if (Accounts.ContainsKey(account1.Nombre))
+        {
+            Console.WriteLine($"Le solde du compte {account1.Nombre} est de {account1.Balance}.");
+        }
+        else
+        {
+            Console.WriteLine("Compte inexistant !");
+        }
     }
 }
