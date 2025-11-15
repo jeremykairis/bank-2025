@@ -39,3 +39,4 @@ abstract class Account : IBankAccount
     public event Action<IBankAccount>? NegativeBalanceEvent;
     protected virtual void OnNegativeBalance() => NegativeBalanceEvent?.Invoke(this);
 }
+

@@ -11,7 +11,10 @@ class Bank(Dictionary<string, IBankAccount> accounts, string name)
         else
         {
             Accounts.Add(account.Number, account);
-            ((Account)account).NegativeBalanceEvent += OnNegativeBalance;
+            if (account is CurrentAccount)
+            {
+                ((Account)account).NegativeBalanceEvent += OnNegativeBalance;
+            }
         }
     }
     public void DeleteAccount(string number)
