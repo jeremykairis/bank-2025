@@ -1,21 +1,21 @@
 using System;
 // Définition de la classe Bank qui gère un ensemble de comptes courants
-class Bank(Dictionary<string, CurrentAccount> accounts,string name)
+class Bank(Dictionary<string, CurrentAccount> accounts, string name)
 {
-    public Dictionary<string, CurrentAccount> Accounts { get;  private set; } = accounts;
+    public Dictionary<string, CurrentAccount> Accounts { get; private set; } = accounts;
     public string Name { get; set; } = name;
     public Bank(string name) : this([], name)
-    {   
     {
-        Accounts = [];
-        Name = name;
+        {
+            Accounts = [];
+            Name = name;
 
         }
-        
+
     }
 
 
-// Méthode pour ajouter un compte courant
+    // Méthode pour ajouter un compte courant
     public void AddAccount(CurrentAccount account)
     {
         if (Accounts.ContainsKey(account.Nombre))
@@ -28,7 +28,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
         }
 
     }
-// Méthode pour supprimer un compte courant
+    // Méthode pour supprimer un compte courant
     public void RemoveAccount(CurrentAccount account, string nombre)
     {
         if (Accounts.ContainsKey(nombre))
@@ -41,7 +41,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
             Console.WriteLine("Compte inexistant !");
         }
     }
-// Méthode pour obtenir le solde d'un compte courant
+    // Méthode pour obtenir le solde d'un compte courant
     public void GetBalance(string nombre)
     {
         if (Accounts.ContainsKey(nombre))
@@ -54,7 +54,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
 
         }
     }
-// Méthode pour obtenir les informations d'un compte courant   
+    // Méthode pour obtenir les informations d'un compte courant   
     public void GetAccountInfo(Person user)
     {
         double totalBalance = 0;
@@ -68,7 +68,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
                 hasAccount = true;
             }
         }
-// Afficher le solde total ou un message si aucun compte n'est trouvé
+        // Afficher le solde total ou un message si aucun compte n'est trouvé
         if (!hasAccount)
         {
             Console.WriteLine("Aucun compte trouvé pour cet utilisateur.");
@@ -97,7 +97,7 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
             Console.WriteLine("Compte inexistant !");
         }
     }
-    
+
     // Méthode pour obtenir le solde d'un compte courant
     public void GetBalance(CurrentAccount account1)
     {
@@ -115,5 +115,10 @@ class Bank(Dictionary<string, CurrentAccount> accounts,string name)
         {
             Console.WriteLine("Compte inexistant !");
         }
+    }
+    // Méthode qui traitera l'evenement "negativeBalanceAction" 
+    public void NegativeBalanceAction(Account account)
+    {
+        Console.WriteLine($"Attention : Le  numéro de compte {account} a un solde négatif !");
     }
 }
