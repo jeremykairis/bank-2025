@@ -1,4 +1,4 @@
-public interface IAccount
+internal interface IAccount
 {
     string Number { get; }
     double Balance { get; }
