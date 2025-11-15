@@ -14,4 +14,8 @@ public class Person
         LastName = nom;
         BirthDate = nom;
     }
+    public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
 }
