@@ -4,6 +4,8 @@ abstract class Account : IBankAccount
     public double Balance { get; private set; }
     public Person Owner { get; private set; }
 
+    public event Action<Account>? NegativeBalanceEvent;
+
     protected Account(string number, Person owner)
     {
         Number = number;
@@ -39,7 +41,6 @@ abstract class Account : IBankAccount
         Balance -= amount;
     }
 
-    // Règle de retrait par défaut : jamais en négatif
     protected virtual bool CanWithdraw(double amount) => Balance - amount >= 0;
 
     protected abstract double CalculInterest();
@@ -48,5 +49,11 @@ abstract class Account : IBankAccount
     {
         double interest = CalculInterest();
         Balance += interest;
+    }
+
+    // Méthode protégée pour déclencher l'événement
+    protected void OnNegativeBalance()
+    {
+        NegativeBalanceEvent?.Invoke(this);
     }
 }

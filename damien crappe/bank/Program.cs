@@ -25,11 +25,30 @@ class Program
         methods.ShowMoney(currentAccount);
 
         currentAccount.ApplyInterest();
-        Console.WriteLine($"Après intérêts, le solde du compte de {currentAccount.Owner} est de {currentAccount.Balance} EUR.");
+        Console.WriteLine($"Après intérêts, le solde du compte de {currentAccount.Owner.FirstName} est de {currentAccount.Balance} EUR.");
 
+        // Test de l'événement : retrait qui fait passer le compte en négatif
+        Console.WriteLine("Test événement balance négative");
+        Console.WriteLine($"Solde actuel : {currentAccount.Balance} EUR");
+        
         try
         {
-            currentAccount.Withdraw(1_000_000); // devrait déclencher une InsufficientBalanceException
+            currentAccount.Withdraw(1600); // Devrait passer en négatif et déclencher l'événement
+            Console.WriteLine($"Nouveau solde : {currentAccount.Balance} EUR");
+        }
+        catch (InsufficientBalanceException ex)
+        {
+            Console.WriteLine("Erreur de solde : " + ex.Message);
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine("Erreur de montant : " + ex.Message);
+        }
+
+        Console.WriteLine("Test retrait trop important");
+        try
+        {
+            currentAccount.Withdraw(1_000_000); // déclenche une InsufficientBalanceException
         }
         catch (InsufficientBalanceException ex)
         {

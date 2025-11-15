@@ -28,6 +28,19 @@ class CurrentAccount : Account
     protected override bool CanWithdraw(double amount)
         => Balance - amount >= -CreditLine;
 
+    public override void Withdraw(double amount)
+    {
+        bool wasPositive = Balance >= 0;
+        
+        base.Withdraw(amount);
+        
+        // Déclencher l'événement uniquement si on passe de positif à négatif
+        if (wasPositive && Balance < 0)
+        {
+            OnNegativeBalance();
+        }
+    }
+
     protected override double CalculInterest()
     {
         if (Balance < 0)
