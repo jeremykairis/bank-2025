@@ -14,6 +14,8 @@ public class Person
         LastName = nom;
         BirthDate = nom;
     }
+
+    // Méthode pour afficher le nom complet de la personne
     public override string ToString()
         {
             return $"{FirstName} {LastName}";
