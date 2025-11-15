@@ -47,22 +47,21 @@
         // --- Méthode pour retirer de l’argent ---
         public virtual void Withdraw(double amount)
         {
-            if (amount <= 0)
-            {
-                Console.WriteLine("Le montant du retrait doit être positif.");
-                return;
-            }
+                if (amount <= 0)
+    {
+        throw new ArgumentOutOfRangeException(nameof(amount),
+            "Le montant du retrait doit être supérieur à 0.");
+    }
 
-            if (Balance - amount < 0)
-            {
-                Console.WriteLine("Fonds insuffisants. Retrait refusé.");
-                return;
-            }
+    if (Balance < amount)
+    {
+        throw new InsufficientBalanceException(
+            "Fonds insuffisants : impossible d'effectuer ce retrait.");
+    }
 
-            Balance -= amount;
-            Console.WriteLine($"Retrait de {amount:C} effectué. Nouveau solde : {Balance:C}");
-        }
-
+    Balance -= amount;
+}
+            
         // --- Méthode abstraite pour calculer les intérêts ---
         protected abstract double CalculInterest();
 

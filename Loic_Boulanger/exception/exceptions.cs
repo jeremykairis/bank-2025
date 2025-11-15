@@ -1,6 +1,6 @@
 ﻿namespace Loic_Boulanger.exception;
 
-public class exceptions
+public class InsufficientBalanceException : Exception
 {
-    
+    public InsufficientBalanceException() { }  
 }

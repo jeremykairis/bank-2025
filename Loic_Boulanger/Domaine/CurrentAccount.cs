@@ -4,7 +4,22 @@ namespace Loic_Boulanger.Domaine
 {
     public class CurrentAccount : Account
     {
-        public double CreditLine { get; private set; }
+        private double creditLine;
+
+        public double CreditLine
+        {
+            get => creditLine;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value),
+                        "La ligne de crédit doit être supérieure ou égale à 0.");
+                }
+
+                creditLine = value;
+            }
+        }
 
         public CurrentAccount(string number, Person owner, double creditLine)
             : base(number, owner)
