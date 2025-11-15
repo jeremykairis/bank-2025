@@ -4,26 +4,37 @@ using Loic_Boulanger.Domaine;
 class Program
 {
 
-    static void Main()
-    {
-        try
+    static void Main(string[] args)
         {
-            var owner = new Person("Alice", "Durand");
+            // --- Création d'une banque ---
+            Bank myBank = new Bank("Banque du Loïc");
 
-        // Utilise CurrentAccount (compte courant) avec découvert de 500 €
-        var account = new CurrentAccount("12345", owner, 500);
+            // --- Création d'une personne ---
+            Person loic = new Person("Loïc", "Boulanger");
 
-        account.Deposit(1000);
-        account.Withdraw(1200);  // OK → solde = -200
-        account.Withdraw(400);   // REFUSÉ → dépasserait le découvert
+            // --- Création d'un compte courant avec découvert autorisé de 500 ---
+            CurrentAccount loicAccount = new CurrentAccount("CC001", loic, 500);
 
-        Console.WriteLine($"\nSolde final du compte {account.Number} : {account.Balance:C}");
+            // --- Ajout du compte à la banque (s'abonne automatiquement à l'événement) ---
+            myBank.AddAccount(loicAccount);
+
+            // --- Dépôt initial ---
+            loicAccount.Deposit(200);
+
+            // --- Retrait normal (solde reste positif) ---
+            loicAccount.Withdraw(100);
+
+            // --- Retrait qui passe le solde en négatif ---
+            loicAccount.Withdraw(300); // Devrait déclencher NegativeBalanceEvent
+
+            // --- Retrait dépassant le découvert ---
+            loicAccount.Withdraw(500); // Devrait être refusé
+
+            // --- Affichage des comptes ---
+            myBank.DisplayAccounts();
+
+            Console.WriteLine("\nAppuyez sur une touche pour quitter...");
+            Console.ReadKey();
         }
-    
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erreur : {ex.Message}");
     }
-    }
-        
-}
+

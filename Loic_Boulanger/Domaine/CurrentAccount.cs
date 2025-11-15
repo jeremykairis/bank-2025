@@ -5,7 +5,7 @@ namespace Loic_Boulanger.Domaine
     public class CurrentAccount : Account
     {
         private double creditLine;
-        public event NegativeBalanceDelegate NegativeBalanceEvent;
+        
         public double CreditLine
         {
             get => creditLine;
@@ -29,6 +29,7 @@ namespace Loic_Boulanger.Domaine
             
             CreditLine = creditLine;
         }
+        public event NegativeBalanceDelegate? NegativeBalanceEvent;
 
         public override void Withdraw(double amount)
         {
