@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Person
+public class Person 
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
