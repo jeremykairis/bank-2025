@@ -55,3 +55,4 @@ nunit-*.xml
 
 # VS code files
 .vscode/
+.editorconfig
